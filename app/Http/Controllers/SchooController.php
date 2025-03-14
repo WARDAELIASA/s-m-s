@@ -23,32 +23,32 @@ class SchoolController extends Controller
             return view('school.index', compact('schools'));
         }
     }
-    public function addSchool(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            // 'email' => 'required|exists:users,email',
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
-            'location' => 'required',
-        ]);
+    // // public function addSchool(Request $request)
+    // {
+    //     // $validator = Validator::make($request->all(), [
+    //         // 'email' => 'required|exists:users,email',
+    //         'name' => 'required',
+    //         // 'address' => 'required',
+    //         // 'phone' => 'required',
+    //         // 'email' => 'required',
+    //         // 'location' => 'required',
+    //     // ]);
 
-        if ($validator->fails()) {
-            if (REQ::is('api/*')) {
-                return response()->json(["data" => null, "message" => $validator->errors()->first(), "status" => false], 401);
-            } else {
-                return redirect()->back()->with('error', $validator->errors()->first());
-            }
-        }
+    //     if ($validator->fails()) {
+    //         if (REQ::is('api/*')) {
+    //             return response()->json(["data" => null, "message" => $validator->errors()->first(), "status" => false], 401);
+    //         } else {
+    //             return redirect()->back()->with('error', $validator->errors()->first());
+    //         }
+    //     }
 
-        $school = School::create($request->all());
-        if (REQ::is('api/*')) {
-            return response()->json(['data' => $school, "message" => "School added successfully", "status" => true], 200);
-        } else {
-            return back()->with('success', 'School added successfully');
-        }
-    }
+    //     $school = School::create($request->all());
+    //     if (REQ::is('api/*')) {
+    //         return response()->json(['data' => $school, "message" => "School added successfully", "status" => true], 200);
+    //     } else {
+    //         return back()->with('success', 'School added successfully');
+    //     }
+    // }
 
     public function editSchool(Request $request, School $school)
     {
